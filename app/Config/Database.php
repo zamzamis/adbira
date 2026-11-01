@@ -51,6 +51,17 @@ class Database extends Config
     ],
 ];
 
+
+     public function __construct()
+    {
+        parent::__construct();
+
+        if (env('database.default.ssl_ca')) {
+            $this->default['encrypt'] = [
+                'ssl_ca'     => ROOTPATH . env('database.default.ssl_ca'),
+                'ssl_verify' => true,
+            ];
+        }
     //    /**
     //     * Sample database connection for SQLite3.
     //     *
