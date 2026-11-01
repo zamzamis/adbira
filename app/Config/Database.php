@@ -52,16 +52,6 @@ class Database extends Config
 ];
 
 
-     public function __construct()
-    {
-        parent::__construct();
-
-        if (env('database.default.ssl_ca')) {
-            $this->default['encrypt'] = [
-                'ssl_ca'     => ROOTPATH . env('database.default.ssl_ca'),
-                'ssl_verify' => true,
-            ];
-        }
     //    /**
     //     * Sample database connection for SQLite3.
     //     *
@@ -200,9 +190,17 @@ class Database extends Config
         ],
     ];
 
-    public function __construct()
+        public function __construct()
     {
         parent::__construct();
+
+        // Aktifkan SSL kalau variabel ssl_ca diisi (untuk Aiven)
+        if (env('database.default.ssl_ca')) {
+            $this->default['encrypt'] = [
+                'ssl_ca'     => ROOTPATH . env('database.default.ssl_ca'),
+                'ssl_verify' => true,
+            ];
+        }
 
         // Ensure that we always set the database group to 'tests' if
         // we are currently running an automated test suite, so that
