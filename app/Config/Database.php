@@ -37,7 +37,10 @@ class Database extends Config
         'charset'      => 'utf8mb4',
         'DBCollat'     => 'utf8mb4_general_ci',
         'swapPre'      => '',
-        'encrypt'      => false,
+        'encrypt'      => [
+            'ssl_ca'   => ROOTPATH . 'ca.pem',
+            'ssl_verify' => true,
+        ],
         'compress'     => false,
         'strictOn'     => false,
         'failover'     => [],
